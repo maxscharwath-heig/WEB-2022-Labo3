@@ -15,7 +15,7 @@ const r3 = new Rocket(4, t, 600, 400, 100, 0);
 // Game initialization
 const game = new Game([v1, v2, v3, r1, r2, r3]);
 setInterval(() => {
-    // TODO: implement the state loop
+    game.move();
 }, tick);
 
 // Renderer initialization
@@ -23,7 +23,8 @@ let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
 let renderer = new Renderer(game, context);
 let render = () => {
-    // TODO: implement the rendering loop
+    renderer.render();
+    requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
 

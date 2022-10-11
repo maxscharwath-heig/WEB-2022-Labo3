@@ -26,12 +26,14 @@ class Renderer {
     this.context.clearRect(0, 0, width, height);
 
     // Draw the entities
-    for (let entity of this.game.entities) {
-      // TODO:
-      // Use the save, translate, rotate and restore methods of the context
-      // to render the moving entities at the right place and angle.
-
-      // this.renderDebug(entity);
+    for (const entity of this.game.entities) {
+      this.context.save();
+      this.context.translate(entity.x, entity.y);
+      this.context.rotate(entity.angle);
+      this.context.translate(-entity.x, -entity.y);
+      entity.render(this.context);
+      this.renderDebug(entity);
+      this.context.restore();
     }
   }
 
