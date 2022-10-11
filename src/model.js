@@ -44,8 +44,6 @@ class Rocket extends MovingEntity {
      */
     constructor(id, t, x, y, speed, angle) {
         super(id, t, x, y, speed, angle);
-        this.image = new Image();
-        this.image.src = '/max.png';
     }
 
     move() {
@@ -56,15 +54,11 @@ class Rocket extends MovingEntity {
     }
 
     render(context) {
-/*
         const r = 5;
         context.beginPath();
         context.arc(this.x, this.y, r, 0, 2 * Math.PI);
         context.fillStyle = 'rgb(255, 0, 0)';
         context.fill();
-        */
-        const s = 50;
-        context.drawImage(this.image, this.x - s / 2, this.y - s / 2, s, s);
     }
 }
 class Vehicle extends MovingEntity {
@@ -85,8 +79,6 @@ class Vehicle extends MovingEntity {
         this.isTurningLeft = isTurningLeft;
         this.isTurningRight = isTurningRight;
         this.color = color;
-        this.image = new Image();
-        this.image.src = '/lazar.png';
     }
 
     move() {
@@ -112,17 +104,12 @@ class Vehicle extends MovingEntity {
     }
 
     render(context) {
-        /*
         const w = 10;
         const h = 5;
         context.beginPath();
         context.rect(this.x - w / 2, this.y - h / 2, w, h);
         context.strokeStyle = this.color;
         context.stroke();
-        */
-        //draw image for fun
-        const s = 50;
-        context.drawImage(this.image, this.x - s / 2, this.y - s / 2, s, s);
     }
 }
 
