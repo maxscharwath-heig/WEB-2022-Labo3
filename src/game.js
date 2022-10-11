@@ -10,11 +10,10 @@ class Game {
    * Updates the state of the moving entity
    */
   move() {
-    for (let entity of this.entities) {
+    for (const entity of this.entities) {
       entity.move();
     }
   }
 }
 
 export default Game;
-

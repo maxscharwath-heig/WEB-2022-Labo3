@@ -1,6 +1,4 @@
 import { width, height, steeringRadius } from './constants.js';
-import { Vehicle, Rocket } from './model.js';
-
 
 /**
  * A class that renders the state of the game.
@@ -26,7 +24,7 @@ class Renderer {
     this.context.clearRect(0, 0, width, height);
 
     // Draw the entities
-    for (const entity of this.game.entities) {
+    this.game.entities.forEach((entity) => {
       this.context.save();
       this.context.translate(entity.x, entity.y);
       this.context.rotate(entity.angle);
@@ -34,21 +32,20 @@ class Renderer {
       entity.render(this.context);
       this.renderDebug(entity);
       this.context.restore();
-    }
+    });
   }
 
   renderDebug(entity) {
     this.context.fillStyle = 'rgba(0, 0, 0, 0.25)';
     this.context.strokeStyle = 'rgba(0, 0, 0, 0.25)';
-    let i = 12;
-    let x = entity.x - 20;
+    const i = 12;
+    const x = entity.x - 20;
     let y = entity.y + 20;
-    for (let k of Object.keys(entity)) {
-      const v = entity[k];
+    Object.entries(entity).forEach(([k, v]) => {
       if (typeof v === 'number') {
         this.context.fillText(`${k}: ${v.toFixed(0)}`, x, y += i);
       }
-    }
+    });
     if (!(entity.isTurningLeft ^ entity.isTurningRight)) {
       this.context.beginPath();
       this.context.moveTo(entity.x - 80, entity.y);
@@ -57,18 +54,27 @@ class Renderer {
     }
     if (entity.isTurningLeft) {
       this.context.beginPath();
-      this.context.arc(entity.x, entity.y - steeringRadius,
-        steeringRadius, (Math.PI * 1) / 4, (Math.PI * 3) / 4);
+      this.context.arc(
+        entity.x,
+        entity.y - steeringRadius,
+        steeringRadius,
+        (Math.PI * 1) / 4,
+        (Math.PI * 3) / 4,
+      );
       this.context.stroke();
     }
     if (entity.isTurningRight) {
       this.context.beginPath();
-      this.context.arc(entity.x, entity.y + steeringRadius,
-        steeringRadius, (Math.PI * 5) / 4, (Math.PI * 7) / 4);
+      this.context.arc(
+        entity.x,
+        entity.y + steeringRadius,
+        steeringRadius,
+        (Math.PI * 5) / 4,
+        (Math.PI * 7) / 4,
+      );
       this.context.stroke();
     }
   }
-
 }
 
 export default Renderer;
